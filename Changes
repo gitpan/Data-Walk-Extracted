@@ -1,0 +1,13 @@
+Revision history for Data-Walk-Extracted
+
+v0.03_01  2012-02-10 16:07:16 America/Los_Angeles
+
+Initial Release
+
+v0.05_01  2012-03-21 20:03:17 America/Los_Angeles
+
+Adding functionality to support Data::Walk::Prune
+
+v0.05_03  2012-04-03 13:54:29 America/Los_Angeles
+
+First Release to CPAN
