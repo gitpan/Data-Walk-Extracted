@@ -25,4 +25,4 @@ requires:
   MooseX::Types::Moose: 0
   Smart::Comments: 0
   version: 0
-version: v0.05_03
+version: v0.05_05

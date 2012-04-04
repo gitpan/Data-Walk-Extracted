@@ -8,7 +8,6 @@ use Test::Output v1.01 qw(
         stderr_unlike 
         stdout_from
 );
-use YAML::Any;
 use Moose::Util qw( with_traits );
 use lib '../lib', 'lib';
 use Data::Walk::Extracted v0.05;
@@ -23,14 +22,13 @@ my  @methods = qw(
 my  $answer_ref = [
     qr/The composed class passed to 'new' does not have either a 'before_method' or an 'after_method' the Role 'Data::Walk::Print' will be added/,
     [
-        "{", "\tHelping => [", "\t\t{", "\t\t\tSomelevel => {", 
-        "\t\t\t\tSublevel => \'levelvalue\',", "\t\t\t},", "\t\t},", "\t\t{", 
-        "\t\t\tMyKey => {", "\t\t\t\tMiddleKey => {", 
+        "{", "\tHelping => [", "\t\t{", "\t\t\tMyKey => {", "\t\t\t\tMiddleKey => {",
         "\t\t\t\t\tLowerKey1 => 'lvalue1',", "\t\t\t\t\tLowerKey2 => {", 
         "\t\t\t\t\t\tBottomKey1 => '12345',", "\t\t\t\t\t\tBottomKey2 => [", 
         "\t\t\t\t\t\t\t'bavalue2',", "\t\t\t\t\t\t\t'bavalue1',", 
         "\t\t\t\t\t\t\t'bavalue3',", "\t\t\t\t\t\t],", 
-        "\t\t\t\t\t},", "\t\t\t\t},", "\t\t\t},", "\t\t},", "\t],", 
+        "\t\t\t\t\t},", "\t\t\t\t},", "\t\t\t},","\t\t\tSomelevel => {", 
+        "\t\t\t\tSublevel => \'levelvalue\',", "\t\t\t},", "\t\t},", "\t],",
         "\tParsing => {", "\t\tHashRef => {", "\t\t\tLOGGER => {",
         "\t\t\t\trun => 'INFO',", "\t\t\t},", "\t\t},", "\t},",
         "\tSomeotherkey => 'value',", "},"
@@ -44,39 +42,35 @@ my  $answer_ref = [
     [
         "{#<--- Ref Type Match", "\tHelping => [#<--- Secondary Key Match - Ref Type Match",
         "\t\t{#<--- Secondary Position Exists - Ref Type Mismatch", 
+        "\t\t\tMyKey => {#<--- Secondary Key Mismatch - Ref Type Mismatch", 
+        "\t\t\t\tMiddleKey => {#<--- Secondary Key Mismatch - Ref Type Mismatch", 
+        "\t\t\t\t\tLowerKey1 => 'lvalue1',#<--- Secondary Key Mismatch - Secondary Value Does NOT Match", 
+        "\t\t\t\t\tLowerKey2 => {#<--- Secondary Key Mismatch - Ref Type Mismatch", 
+        "\t\t\t\t\t\tBottomKey1 => '12345',#<--- Secondary Key Mismatch - Secondary Value Does NOT Match", 
+        "\t\t\t\t\t\tBottomKey2 => [#<--- Secondary Key Mismatch - Ref Type Mismatch", 
+        "\t\t\t\t\t\t\t'bavalue2',#<--- Secondary Position Does NOT Exist - Secondary Value Does NOT Match", 
+        "\t\t\t\t\t\t\t'bavalue1',#<--- Secondary Position Does NOT Exist - Secondary Value Does NOT Match", 
+        "\t\t\t\t\t\t\t'bavalue3',#<--- Secondary Position Does NOT Exist - Secondary Value Does NOT Match", 
+        "\t\t\t\t\t\t],", "\t\t\t\t\t},", "\t\t\t\t},", "\t\t\t},", 
         "\t\t\tSomelevel => {#<--- Secondary Key Mismatch - Ref Type Mismatch", 
-        "\t\t\t\tSublevel => \'levelvalue\',#<--- Secondary Key Mismatch - Secondary Value Does NOT Match", 
-        "\t\t\t},", "\t\t},", "\t\t{#<--- Secondary Position Exists - Ref Type Match", 
-        "\t\t\tMyKey => {#<--- Secondary Key Match - Ref Type Match", 
-        "\t\t\t\tMiddleKey => {#<--- Secondary Key Match - Ref Type Match", 
-        "\t\t\t\t\tLowerKey1 => 'lvalue1',#<--- Secondary Key Match - Secondary Value Does NOT Match", 
-        "\t\t\t\t\tLowerKey2 => {#<--- Secondary Key Match - Ref Type Match", 
-        "\t\t\t\t\t\tBottomKey1 => '12345',#<--- Secondary Key Match - Secondary Value Does NOT Match", 
-        "\t\t\t\t\t\tBottomKey2 => [#<--- Secondary Key Match - Ref Type Match", 
-        "\t\t\t\t\t\t\t'bavalue2',#<--- Secondary Position Exists - Secondary Value Does NOT Match", 
-        "\t\t\t\t\t\t\t'bavalue1',#<--- Secondary Position Exists - Secondary Value Does NOT Match", 
-        "\t\t\t\t\t\t\t'bavalue3',#<--- Secondary Position Does NOT Exist - Secondary Value Does NOT Match",
-        "\t\t\t\t\t\t],", "\t\t\t\t\t},", "\t\t\t\t},", "\t\t\t},", "\t\t},", "\t],", 
-        "\tParsing => {#<--- Secondary Key Mismatch - Ref Type Mismatch",
+        "\t\t\t\tSublevel => 'levelvalue',#<--- Secondary Key Mismatch - Secondary Value Does NOT Match", 
+        "\t\t\t},", "\t\t},", "\t],", "\tParsing => {#<--- Secondary Key Match - Ref Type Mismatch", 
         "\t\tHashRef => {#<--- Secondary Key Mismatch - Ref Type Mismatch", 
-        "\t\t\tLOGGER => {#<--- Secondary Key Mismatch - Ref Type Mismatch",
+        "\t\t\tLOGGER => {#<--- Secondary Key Mismatch - Ref Type Mismatch", 
         "\t\t\t\trun => 'INFO',#<--- Secondary Key Mismatch - Secondary Value Does NOT Match", 
-        "\t\t\t},", "\t\t},", "\t},",
-        "\tSomeotherkey => 'value',#<--- Secondary Key Match - Secondary Value Matches",
-        '},',
+        "\t\t\t},", "\t\t},", "\t},", 
+        "\tSomeotherkey => 'value',#<--- Secondary Key Match - Secondary Value Matches", 
+        "},", 
     ],
     [
-        "{", "\tHelping => [", "\t\t{", "\t\t\tSomelevel => {", 
-        "\t\t\t\tSublevel => \'levelvalue\',", "\t\t\t},", "\t\t},", "\t\t{", 
-        "\t\t\tMyKey => {", "\t\t\t\tMiddleKey => {", 
+        "{", "\tHelping => [", "\t\t{", "\t\t\tMyKey => {", "\t\t\t\tMiddleKey => {", 
         "\t\t\t\t\tLowerKey1 => 'lvalue1',", "\t\t\t\t\tLowerKey2 => {", 
         "\t\t\t\t\t\tBottomKey1 => '12345',", "\t\t\t\t\t\tBottomKey2 => [", 
-        "\t\t\t\t\t\t\t'bavalue2',", "\t\t\t\t\t\t\t'bavalue1',", 
-        "\t\t\t\t\t\t\t'bavalue3',", "\t\t\t\t\t\t],", 
-        "\t\t\t\t\t},", "\t\t\t\t},", "\t\t\t},", "\t\t},", "\t],", 
-        "\tParsing => {", "\t\tHashRef => {", "\t\t\tLOGGER => {",
-        "\t\t\t\trun => 'INFO',", "\t\t\t},", "\t\t},", "\t},",
-        "\tSomeotherkey => 'value',", "},"
+        "\t\t\t\t\t\t\t'bavalue2',", "\t\t\t\t\t\t\t'bavalue1',", "\t\t\t\t\t\t\t'bavalue3',", 
+        "\t\t\t\t\t\t],", "\t\t\t\t\t},", "\t\t\t\t},", "\t\t\t},", "\t\t\tSomelevel => {", 
+        "\t\t\t\tSublevel => 'levelvalue',", "\t\t\t},", "\t\t},", "\t],", "\tParsing => {", 
+        "\t\tHashRef => {", "\t\t\tLOGGER => {", "\t\t\t\trun => 'INFO',", "\t\t\t},", "\t\t},", 
+        "\t},", "\tSomeotherkey => 'value',", "},",
     ],
 ];
 ### <where> - easy questions
@@ -87,27 +81,37 @@ map can_ok(
 
 ### <where> - hard questions
 lives_ok{   
-    $firstref = Load(
-        '---
-        Parsing:
-            HashRef:
-                LOGGER:
-                    run: INFO
-        Someotherkey: value
-        Helping:
-            - Somelevel:
-                Sublevel: levelvalue
-            - MyKey:
-                MiddleKey:
-                    LowerKey1: lvalue1
-                    LowerKey2:
-                        BottomKey1: 12345
-                        BottomKey2:
-                        - bavalue2
-                        - bavalue1
-                        - bavalue3'
-    );
-}                                                       'Build a data ref for testing';
+    $firstref = {
+        Someotherkey    => 'value',
+        Parsing         =>{
+            HashRef =>{
+                LOGGER =>{
+                    run => 'INFO',
+                },
+            },
+        },
+        Helping =>[
+            {
+                Somelevel =>{
+                    Sublevel => 'levelvalue',
+                },
+                MyKey =>{
+                    MiddleKey =>{
+                        LowerKey1 => 'lvalue1',
+                        LowerKey2 => {
+                            BottomKey1 => '12345',
+                            BottomKey2 =>[
+                                'bavalue2',
+                                'bavalue1',
+                                'bavalue3',
+                            ],
+                        },
+                    },
+                },
+            },
+        ],
+    };
+}                                                       'Build the $first for testing';
 stderr_like{
     $AT_ST = Data::Walk::Extracted->new( sort_HASH => 1, );#To force order for testing purposes
 } $answer_ref->[$test_case],                            "Testing for the warning from test case: $test_case (while creating a new instance)";
@@ -130,22 +134,38 @@ is_deeply(  $result,
 $test_case++;
 lives_ok{ $AT_ST->skip_ARRAY_ref( 0 ); }                "... set 'skip = NO' for future parsed ARRAY refs (test case: $test_case)";
 lives_ok{   
-    $secondref = Load(
-        '---
-        Someotherkey: value
-        Helping:
-            - Somelevel
-            - MyKey:
-                MiddleKey:
-                    LowerKey1:
-                        Testkey1: value1
-                        Testkey2: value2
-                    LowerKey2:
-                        BottomKey1: 12346
-                        BottomKey2:
-                        - bavalue1
-                        - bavalue3'
-    );
+    $secondref = {
+        Someotherkey => 'value',
+        'Parsing' =>[
+            HashRef =>{
+                LOGGER =>{
+                    run => 'INFO',
+                },
+            },
+        ],
+        Helping =>[
+            [
+                'Somelevel',
+            ],
+            {
+                MyKey =>{
+                    MiddleKey =>{
+                        LowerKey1 =>{
+                            Testkey1 => 'value1',
+                            Testkey2 => 'value2',
+                        },
+                        LowerKey2 => {
+                            BottomKey1 => '12354',
+                            BottomKey2 =>[
+                                'bavalue1',
+                                'bavalue3',
+                            ],
+                        },
+                    },
+                },
+            },
+        ],
+    };
 }                                                       "Build a second ref for testing (test case $test_case)";
 $stdout = stdout_from{
     $result = $AT_ST->walk_the_data(
