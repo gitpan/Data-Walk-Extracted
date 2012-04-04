@@ -12,7 +12,10 @@ v0.05_03  2012-04-03 13:54:29 America/Los_Angeles
 
 First Release to CPAN
 
-v0.05_05  2012-04-04 10:27:33 America/Los_Angeles
+v0.05_07  2012-04-04 11:34:36 America/Los_Angeles
 
 Removed YAML from the test files since it was an 
 unnessesary dependancy that caused test fails.
+
+Also updated some links in the POD and included 
+Data::ModeMerge in the See Also section
