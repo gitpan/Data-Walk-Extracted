@@ -12,8 +12,9 @@ my %WriteMakefileArgs = (
   "ABSTRACT" => "An extracted dataref walker\r",
   "AUTHOR" => "Jed Lund <jandrew\@cpan.org>",
   "BUILD_REQUIRES" => {
+    "Capture::Tiny" => 0,
+    "Modern::Perl" => 0,
     "Moose::Util" => 0,
-    "Test::And::Output" => "v0.003",
     "Test::Moose" => 0,
     "Test::More" => 0,
     "Test::Most" => 0,
@@ -28,7 +29,6 @@ my %WriteMakefileArgs = (
   "NAME" => "Data::Walk::Extracted",
   "PREREQ_PM" => {
     "Carp" => 0,
-    "Modern::Perl" => 0,
     "Moose" => 0,
     "Moose::Role" => 0,
     "MooseX::StrictConstructor" => 0,
@@ -36,7 +36,7 @@ my %WriteMakefileArgs = (
     "Smart::Comments" => 0,
     "version" => 0
   },
-  "VERSION" => "v0.007_001",
+  "VERSION" => "v0.007_005",
   "test" => {
     "TESTS" => "t/*.t"
   }

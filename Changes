@@ -22,18 +22,16 @@ Data::ModeMerge in the See Also section
 
 v0.007_001 2012-04-19 08:46:23 America/Los_Angeles
 
-Reworked the guts to allow multiple Rolls 
-to be added to the same base class .  This is a 
-major re-write to the ::Extracted class interface 
-to support this but only a minor changes to the 
-Role interfaces.  Among other changes the ::Extracted 
-class does not add a default role anymore.  The 
-::Extracted class no longer has public method for 
-processing data either.  Additionally the 
-MooseX::StrictConstructor (Module/Pragma) was added 
-to the class.
+Reworked the guts to allow multiple Rolls to be added to the same base class .  This is a major re-write to the ::Extracted class interface to support this but only a minor changes to the Role interfaces.  Among other changes the ::Extracted class does not add a default role anymore.  The ::Extracted class no longer has public method for processing data either.  Additionally the MooseX::StrictConstructor (Module/Pragma) was added to the class.
 
 Data::Walk::Graft is added to the package
 
-Testing for Data::Walk::Print is switched from 
-Test::Output to Test::And::Output.
+Testing for Data::Walk::Print is switched from Test::Output to Test::And::Output.
+
+v0.007_005 2012-05-17 08:24:20 America/Los_Angeles
+
+Updated the POD to be consistent.  
+
+Switched testing from Test::And::Ouput to use Capture::Tiny.
+
+
