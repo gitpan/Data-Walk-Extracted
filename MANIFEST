@@ -6,6 +6,7 @@ META.yml
 Makefile.PL
 README.pod
 dist.ini
+lib/Data/Walk/Clone.pm
 lib/Data/Walk/Extracted.pm
 lib/Data/Walk/Graft.pm
 lib/Data/Walk/Print.pm
@@ -14,7 +15,10 @@ t/001-load.t
 t/002-pod.t
 t/003-Data-Walk-Extracted.t
 t/004-Data-Walk-Prune.t
-t/005-Data-Walk-Graft.t
+t/005-Data-Walk-Clone.t
+t/006-Data-Walk-Graft.t
+t/010-Data-Walk-All.t
+t/Data-Walk-Clone-example.pl
 t/Data-Walk-Graft-example.pl
 t/Data-Walk-Print-example.pl
 t/Data-Walk-Prune-example.pl

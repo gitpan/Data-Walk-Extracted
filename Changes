@@ -22,7 +22,12 @@ Data::ModeMerge in the See Also section
 
 v0.007_001 2012-04-19 08:46:23 America/Los_Angeles
 
-Reworked the guts to allow multiple Rolls to be added to the same base class .  This is a major re-write to the ::Extracted class interface to support this but only a minor changes to the Role interfaces.  Among other changes the ::Extracted class does not add a default role anymore.  The ::Extracted class no longer has public method for processing data either.  Additionally the MooseX::StrictConstructor (Module/Pragma) was added to the class.
+Reworked the guts to allow multiple Rolls to be added to the same base class .  
+This is a major re-write to the ::Extracted class interface to support this but 
+only a minor changes to the Role interfaces.  Among other changes the ::Extracted 
+class does not add a default role anymore.  The ::Extracted class no longer has 
+public method for processing data either.  Additionally the MooseX::StrictConstructor 
+(Module/Pragma) was added to the class.
 
 Data::Walk::Graft is added to the package
 
@@ -34,4 +39,36 @@ Updated the POD to be consistent.
 
 Switched testing from Test::And::Ouput to use Capture::Tiny.
 
+v0.011_001 2012-07-09 14:14:53 America/Los_Angeles
 
+Changes includes additions to use this package in Log::Shiras
+
+Added a method for tracking actual subtractions 
+in the prune_data method.  This includes a 'remember_prune_items' attribute 
+and a 'get_pruned_positions' method.  See the POD for Data::Walk::Prune for 
+more details.
+
+Added another role Data::Walk::Clone to allow for targeted cloning of data 
+structures.
+
+moved the _dispatch_method to Data::Walk::Extracted so that dispatch tables by 
+Role could be added without duplicating that code.
+
+Changed the graft_data function to clone the reference and allow for clone 
+definition (Using Data::Walk::Clone)
+
+built in a 'Single shot settings' processor of attributes passed in the method call for 
+the _process_the_data method in Data::Walk::Extracted.  This will allow for possible 
+attribute calls in the method that will only affect that one pass of the method call.
+
+Added graft memory like the prune memory
+
+created the private method _build_branch in Data::Walk::Extracted to build the branch 
+to the current branchref point if requested.   This is used by Data::Walk::Graft and 
+Data::Walk::Prune
+
+Refactored Data::Walk::Extracted to use dispatch tables
+
+Improved the Data::Walk::Prune documentation and changed the prune memory attribute name
+
+Added the ability of the sort_XXX attributes to take sort CodeRefs ex. sub{ $b cmp $a }
