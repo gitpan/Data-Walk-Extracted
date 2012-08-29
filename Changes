@@ -100,3 +100,7 @@ Data::Walk::Print.
 Added a DEFAULT failover to the dispatch method choices
 
 Added a Graft memory to Data::Walk::Graft
+
+v0.015_005 2012-08-29 12:05:41 America/Los_Angeles
+
+Removed the (bad) fixed primary call in Data::Walk:Clone - I don't remember how it got there.
