@@ -78,3 +78,25 @@ v0.013_001 2012-07-09 21:59:29 America/Los_Angeles
 added recognition of a 'name' key in the '_dispatch_method' for Data::Walk::Extracted (Meta data for dispatch methods)
 
 Fixed a failure to seed empty hash refs and array refs in the deep_clone method
+
+
+v0.015_003 2012-08-28 17:22:53 America/Los_Angeles
+
+changed the _extracted_ref_type to use hash key lookups rather than if then statements.  
+This isn't really a standard disptach table since the ref type hasn't been determined 
+yet.
+
+Added multilayer support to one-shot attributes.  This allows the one shot attribute to stay 
+in force for complete method call from a Role if the role makes a nested walking call to 
+another Role.
+
+Another re-write of the guts of Data::Walk::Extracted to untangle the path of recursion.
+
+The re-write of Data::Walk::Extracted includes the addition of a "Zeroth" branch_ref element.
+
+The re-write of Data::Walk::Extracted prompted the addition of some dispatch tables to 
+Data::Walk::Print.
+
+Added a DEFAULT failover to the dispatch method choices
+
+Added a Graft memory to Data::Walk::Graft
