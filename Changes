@@ -79,7 +79,6 @@ added recognition of a 'name' key in the '_dispatch_method' for Data::Walk::Extr
 
 Fixed a failure to seed empty hash refs and array refs in the deep_clone method
 
-
 v0.015_003 2012-08-28 17:22:53 America/Los_Angeles
 
 changed the _extracted_ref_type to use hash key lookups rather than if then statements.  
@@ -104,3 +103,29 @@ Added a Graft memory to Data::Walk::Graft
 v0.015_005 2012-08-29 12:05:41 America/Los_Angeles
 
 Removed the (bad) fixed primary call in Data::Walk:Clone - I don't remember how it got there.
+
+v0.017_001 2012-10-04 12:21:56 America/Los_Angeles
+
+Changed print_data to print out the scalar data pointer for skipped nodes instead of the word SKIPPED
+
+Move all the node skipping to Data::Walk::Extracted from the various roles and then added a skip flag to the $passed_ref for tracking by the roles.   This includes a rewrite of all skipping attributes with their callouts (breaks backwards compatibility!):
+
+Moved the dispatch method off to it's own role for portability.
+
+Changed the test suit to use MooseX::ShortCut::BuildInstance
+
+Rewrote the passed ref to track skip, primary_type, and secondary_type rather than testing for it each time. (also breaks backwards compatibility)
+
+changed the base state to SCALAR and UNDEF rather than going past SCALAR and UNDEF to END. (also breaks backwards compatibility)
+
+v0.019_003 2013-01-08 09:18:18 America/Los_Angeles
+
+Removed the dispatch table and type tables to their own modules
+
+v0.019_005 2013-01-13 21:48:27 America/Los_Angeles
+
+Major update of the POD's.
+
+v0.019_005 2013-01-13 21:51:49 America/Los_Angeles
+
+A minor change to the dist.ini file

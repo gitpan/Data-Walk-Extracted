@@ -2,27 +2,24 @@
 use Modern::Perl;
 use Moose::Util qw( with_traits );
 use lib '../lib', 'lib';
-use Data::Walk::Extracted 0.019;
-use Data::Walk::Graft 0.013;
-use Data::Walk::Print 0.015;
+use Data::Walk::Extracted 0.015;
+use Data::Walk::Diff 0.001;
+use Data::Walk::Print 0.011;
 
-my  $gardener = with_traits( 
+my  $inspector_clouseau = with_traits( 
         'Data::Walk::Extracted', 
         ( 
-            'Data::Walk::Graft', 
-			'Data::Walk::Clone',
+            'Data::Walk::Diff',
             'Data::Walk::Print',
         ) 
     )->new(
-		sorted_nodes =>{
-			HASH => 1,
-		},# For demonstration consistency
+		sort_HASH => 1,# For demonstration consistency
 		#Until Data::Walk::Extracted and ::Graft support these types
 		#(watch Data-Walk-Extracted on github)
-		skipped_nodes =>{ 
-			OBJECT => 1,
-			CODEREF => 1,
-		},
+		dont_clone_node_types =>[
+			'OBJECT',
+			'CODEREF',
+		],
 		graft_memory => 1,
 	);
 my  $tree_ref = {
