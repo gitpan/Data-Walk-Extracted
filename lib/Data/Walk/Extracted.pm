@@ -4,7 +4,7 @@ use Moose;
 use MooseX::StrictConstructor;
 use Class::Inspector;
 use Scalar::Util qw( reftype );
-use version; our $VERSION = qv('0.019_005');
+use version; our $VERSION = qv('0.019_007');
 use Carp qw( confess );
 use MooseX::Types::Moose qw(
         ArrayRef
@@ -23,6 +23,7 @@ if( $ENV{ Smart_Comments } ){
 use Data::Walk::Extracted::Types 0.001 qw(
 		posInt
 	);
+use MooseX::ShortCut::BuildInstance 0.005;
 with 'Data::Walk::Extracted::Dispatch' =>{ -VERSION => 0.001 };
 
 #########1 Package Variables  3#########4#########5#########6#########7#########8#########9
