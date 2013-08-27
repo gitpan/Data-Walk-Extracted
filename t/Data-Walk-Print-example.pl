@@ -1,10 +1,9 @@
 #!perl
-use Modern::Perl;
 use YAML::Any;
 use Moose::Util qw( with_traits );
 use lib '../lib';
-use Data::Walk::Extracted 0.019;
-use Data::Walk::Print 0.015;
+use Data::Walk::Extracted 0.020;
+use Data::Walk::Print 0.020;
 
 #Use YAML to compress writing the data ref
 my  $firstref = Load(
