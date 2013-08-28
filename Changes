@@ -146,4 +146,14 @@ Final changes to the POD and prep for release to CPAN
 
 0.020.004 2013-08-27 07:29:16 America/Los_Angeles
 
-Another cool change
+Updated the Readme POD
+
+0.022.002 2013-08-27 20:17:30 America/Los_Angeles
+
+Removed the requirement for use Moose::Role from the Types library
+Fixed a digit width that was causing perl on bsdunix to fail
+Fixed some POD that was causing some linux perl to fail
+
+0.022.004 2013-08-27 20:31:58 America/Los_Angeles
+
+Escaped the # in the url links

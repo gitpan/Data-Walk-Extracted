@@ -4,7 +4,7 @@ use Moose;
 use MooseX::StrictConstructor;
 use Class::Inspector;
 use Scalar::Util qw( reftype );
-use version; our $VERSION = qv('0.020.004');
+use version; our $VERSION = qv('0.022.004');
 use Carp qw( confess );
 use MooseX::Types::Moose qw(
         ArrayRef
@@ -1947,7 +1947,7 @@ This is not an extention of L<Data::Walk|https://metacpan.org/module/Data::Walk>
 The core class has no external effect.  All output comes from 
 L<addtions to the class|/Extending Data::Walk::Extracted>.
 
-This module uses the 'L<defined or|http://perldoc.perl.org/perlop.html#Logical-Defined-Or>' 
+This module uses the 'L<defined or|http://perldoc.perl.org/perlop.htmlE<35>Logical-Defined-Or>' 
 (  //= ) and so requires perl 5.010 or higher.
 
 This is a L<Moose|https://metacpan.org/module/Moose::Manual> based data handling class.  
@@ -2001,6 +2001,9 @@ B<5.> Add a Data::Walk::Thin Role to the package
 
 B<6.> Add a Data::Walk::Substitute Role to the package
 
+B<7.> Add L<Log::Shiras||https://metacpan.org/module/Log::Shiras> debugging in exchange for
+L<Smart::Comments|https://metacpan.org/module/Smart::Comments>
+
 =back
 
 =head1 AUTHOR
@@ -2028,7 +2031,7 @@ LICENSE file included with this module.
 L<version|https://metacpan.org/module/version>
 
 L<5.010|http://perldoc.perl.org/perl5100delta.html> (for use of 
-L<defined or|http://perldoc.perl.org/perlop.html#Logical-Defined-Or> //)
+L<defined or|http://perldoc.perl.org/perlop.htmlE<35>Logical-Defined-Or> //)
 
 L<Class::Inspector|https://metacpan.org/module/Class::Inspector>
 
