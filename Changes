@@ -157,3 +157,7 @@ Fixed some POD that was causing some linux perl to fail
 0.022.004 2013-08-27 20:31:58 America/Los_Angeles
 
 Escaped the # in the url links
+
+0.022.006 2013-08-28 08:38:17 America/Los_Angeles
+
+Updated Test::Pod to require v1.48 to see if that fixes some linux test fails
