@@ -161,3 +161,10 @@ Escaped the # in the url links
 0.022.006 2013-08-28 08:38:17 America/Los_Angeles
 
 Updated Test::Pod to require v1.48 to see if that fixes some linux test fails
+Also removed a return prior to a | in one url to see if that helps
+
+0.024.002 2013-08-30 07:46:54 America/Los_Angeles
+
+Updated/tested all the POD links
+Skipped Test::Pod altogether since there is a weird linux vs Windows space thing
+Brought all versions to the same level for Kwalitee
