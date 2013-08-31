@@ -168,3 +168,7 @@ Also removed a return prior to a | in one url to see if that helps
 Updated/tested all the POD links
 Skipped Test::Pod altogether since there is a weird linux vs Windows space thing
 Brought all versions to the same level for Kwalitee
+
+0.024.004 2013-08-31 08:02:53 America/Los_Angeles
+
+Removed all of the overly tricky POD self references to mid paragraph points
